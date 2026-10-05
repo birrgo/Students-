@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - MediaVault</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #060911; color: #f3f4f6; }
+        .glass-panel { background: rgba(17, 24, 39, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .gradient-text { background: linear-gradient(135deg, #2dd4bf 0%, #38bdf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="glass-panel w-full max-w-md p-8 rounded-3xl border border-slate-800 shadow-2xl space-y-6">
+        
+        <!-- Header -->
+        <div class="text-center space-y-2">
+            <a href="index.html" class="inline-block w-12 h-12 rounded-2xl bg-gradient-to-tr from-teal-500 to-cyan-500 text-slate-950 font-black text-2xl flex items-center justify-center mx-auto shadow-lg shadow-teal-500/20">
+                <i class="fa-solid fa-user-plus"></i>
+            </a>
+            <h2 class="text-2xl font-black text-slate-100">Create Creator Account</h2>
+            <p class="text-xs text-slate-400">Gets auto-assigned incremental sequence ID (e.g. ST 01, ST 02)</p>
+        </div>
+
+        <!-- Alert Notification Box -->
+        <div id="alertBox" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+
+        <!-- Form -->
+        <form id="registerForm" class="space-y-4">
+            <div class="space-y-1">
+                <label class="block text-[10px] font-bold uppercase text-slate-400 tracking-wider">Full Name</label>
+                <input type="text" id="regFullName" required placeholder="John Doe" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+            </div>
+
+            <div class="space-y-1">
+                <label class="block text-[10px] font-bold uppercase text-slate-400 tracking-wider">Email Address</label>
+                <input type="email" id="regEmail" required placeholder="creator@domain.com" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+            </div>
+
+            <div class="space-y-1">
+                <label class="block text-[10px] font-bold uppercase text-slate-400 tracking-wider">Password</label>
+                <input type="password" id="regPassword" required placeholder="••••••••" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+            </div>
+
+            <!-- Payment Method Dropdown -->
+            <div class="space-y-1">
+                <label class="block text-[10px] font-bold uppercase text-slate-400 tracking-wider">Payout Payment Method</label>
+                <select id="regPaymentMethod" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    <option value="" disabled selected>Select Payment Method</option>
+                    <optgroup label="Crypto Exchanges">
+                        <option value="Bybit">Bybit</option>
+                        <option value="Binance">Binance</option>
+                    </optgroup>
+                    <optgroup label="Ethiopian Banks">
+                        <option value="Commercial Bank of Ethiopia (CBE)">Commercial Bank of Ethiopia (CBE)</option>
+                        <option value="Awash Bank">Awash Bank</option>
+                        <option value="Bank of Abyssinia">Bank of Abyssinia (BOA)</option>
+                        <option value="Dashen Bank">Dashen Bank</option>
+                        <option value="Cooperative Bank of Oromia">Cooperative Bank of Oromia (CBO)</option>
+                        <option value="Hibret Bank">Hibret Bank</option>
+                        <option value="Nib International Bank">Nib International Bank</option>
+                        <option value="Wegagen Bank">Wegagen Bank</option>
+                        <option value="Oromia Bank">Oromia Bank</option>
+                        <option value="Zemen Bank">Zemen Bank</option>
+                        <option value="Bunna International Bank">Bunna International Bank</option>
+                        <option value="Berhan Bank">Berhan Bank</option>
+                        <option value="Addis International Bank">Addis International Bank</option>
+                        <option value="Global Bank Ethiopia">Global Bank Ethiopia</option>
+                        <option value="Enat Bank">Enat Bank</option>
+                        <option value="ZamZam Bank">ZamZam Bank</option>
+                        <option value="Hijra Bank">Hijra Bank</option>
+                        <option value="Siinqee Bank">Siinqee Bank</option>
+                        <option value="Amhara Bank">Amhara Bank</option>
+                        <option value="Tsehay Bank">Tsehay Bank</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <!-- Account Number / Wallet ID Field -->
+            <div class="space-y-1">
+                <label class="block text-[10px] font-bold uppercase text-slate-400 tracking-wider">Account Number / Pay ID / Wallet</label>
+                <input type="text" id="regAccountNumber" required placeholder="Enter Bank Account No or Pay ID/Wallet" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+            </div>
+
+            <button type="submit" id="btnRegister" class="w-full py-3.5 bg-gradient-to-r from-teal-400 to-cyan-400 hover:from-teal-300 hover:to-cyan-300 text-slate-950 font-black text-sm rounded-xl shadow-lg shadow-teal-500/20 transition-all mt-2">
+                Register & Get ST Sequence ID
+            </button>
+        </form>
+
+        <!-- Footer Links -->
+        <div class="text-center space-y-2 pt-2 border-t border-slate-800/80">
+            <p class="text-xs text-slate-400">
+                Already have an account? 
+                <a href="login.html" class="text-teal-400 font-bold hover:underline">Sign In</a>
+            </p>
+            <div>
+                <a href="index.html" class="text-[11px] text-slate-500 hover:text-slate-300">← Back to Home Page</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Realtime Database Only Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getDatabase, ref, runTransaction, set, push } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAErSTm1Pa6Ey4cB6gKvm1JFUwOAtR72zs",
+            authDomain: "students-de059.firebaseapp.com",
+            databaseURL: "https://students-de059-default-rtdb.firebaseio.com",
+            projectId: "students-de059",
+            storageBucket: "students-de059.firebasestorage.app",
+            messagingSenderId: "411149656460",
+            appId: "1:411149656460:web:41d417ec363631ffac76a9",
+            measurementId: "G-H6R17PPP8R"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        function showAlert(msg, isError = true) {
+            const box = document.getElementById('alertBox');
+            box.className = `p-3 rounded-xl text-xs font-semibold ${isError ? 'bg-rose-950/80 text-rose-300 border border-rose-800' : 'bg-emerald-950/80 text-emerald-300 border border-emerald-800'}`;
+            box.innerText = msg;
+            box.classList.remove('hidden');
+        }
+
+        async function getNextSTId() {
+            try {
+                const counterRef = ref(db, 'counters/user_sequence');
+                const result = await runTransaction(counterRef, (currentVal) => (currentVal || 0) + 1);
+                if (result.committed) {
+                    return `ST ${String(result.snapshot.val()).padStart(2, '0')}`;
+                }
+            } catch (err) {
+                console.warn("Counter fallback:", err);
+            }
+            const currentSeq = parseInt(localStorage.getItem('sim_user_seq') || '0') + 1;
+            localStorage.setItem('sim_user_seq', currentSeq.toString());
+            return `ST ${String(currentSeq).padStart(2, '0')}`;
+        }
+
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fullName = document.getElementById('regFullName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const paymentMethod = document.getElementById('regPaymentMethod').value;
+            const accountNumber = document.getElementById('regAccountNumber').value;
+            const btn = document.getElementById('btnRegister');
+
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Saving...`;
+
+            try {
+                // Generate a unique Database Key for the user directly in Realtime DB
+                const newUserRef = push(ref(db, 'users'));
+                const uid = newUserRef.key;
+
+                // Get next sequence ID (ST 01, ST 02, etc.)
+                const assignedStId = await getNextSTId();
+
+                const userProfile = {
+                    fullName,
+                    email,
+                    password, // Saved directly into Realtime Database
+                    stId: assignedStId,
+                    paymentMethod,
+                    accountNumber,
+                    createdAt: Date.now()
+                };
+
+                // Store in Realtime Database under users/{uid}
+                await set(ref(db, `users/${uid}`), userProfile);
+
+                localStorage.setItem(`user_${uid}`, JSON.stringify(userProfile));
+                localStorage.setItem('demo_session_email', email);
+
+                showAlert(`Account created! Your unique ID is ${assignedStId}. Redirecting...`, false);
+                setTimeout(() => window.location.href = "main.html", 1500);
+
+            } catch (err) {
+                showAlert(err.message || "Failed to create account.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Register & Get ST Sequence ID";
+            }
+        });
+    </script>
+</body>
+</html>
